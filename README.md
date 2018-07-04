@@ -1,24 +1,22 @@
 # Project Overview
 
-In this project you are given a web-based application that reads RSS feeds. The original developer of this application clearly saw the value in testing, they've already included [Jasmine](http://jasmine.github.io/) and even started writing their first test suite! Unfortunately, they decided to move on to start their own company and we're now left with an application with an incomplete test suite. That's where you come in.
+In an existing project given to me by Udacity for my nanodegree course, using Jasmine to test if the Javascript is working properly.
 
 
-## Why this Project?
+## How to Use
 
-Testing is an important part of the development process and many organizations practice a standard of development known as "test-driven development". This is when developers write tests first, before they ever start developing their application. All the tests initially fail and then they start writing application code to make these tests pass.
-
-Whether you work in an organization that uses test-driven development or in an organization that uses tests to make sure future feature development doesn't break existing features, it's an important skill to have!
+Clone it or download the .zip folder and extract it then open the index.html file
 
 
-## What will I learn?
+## Tests That Were Implemented
 
-You will learn how to use Jasmine to write a number of tests against a pre-existing application. These will test the underlying business logic of the application as well as the event handling and DOM manipulation.
-
-
-## How will this help my career?
-
-* Writing effective tests requires analyzing multiple aspects of an application including the HTML, CSS and JavaScript - an extremely important skill when changing teams or joining a new company.
-* Good tests give you the ability to quickly analyze whether new code breaks an existing feature within your codebase, without having to manually test all of the functionality.
+1. Tests for allfeeds has been defined and that it is not empty
+2. Tests for allFeeds have a url and that the url is not empty
+3. Tests for allFeeds have a name and that the name is not empty
+4. Searches for the class of 'menu-hidden' in the body tag and checks that the menu is hidden
+5. Toggles on click event if the menu appears or disappears
+6. Tests if the loadFeed function has at least a single '.entry' within the '.feed' container
+7. Tests to see if two entries are not equal
 
 
 # How will I complete this project?

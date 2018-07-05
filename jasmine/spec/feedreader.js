@@ -23,7 +23,7 @@ $(function() {
          */
         it('are defined', function() {
             expect(allFeeds).toBeDefined();
-            expect(allFeeds.length).not.toBe(0);
+            expect(allFeeds.length).toBeGreaterThan(0);
         });
 
 
@@ -33,7 +33,7 @@ $(function() {
          */
         it('urls are defined', function() {
             for(var i = 0; i < allFeeds.length; i++) {
-                expect(allFeeds[i].url).toBeDefined();
+                expect(allFeeds[i].url).toBeTruthy();
                 expect(allFeeds[i].url.length).not.toBe(0);
             }
         })
@@ -44,29 +44,30 @@ $(function() {
          * and that the name is not empty.
          */
         it('names are defined', function() {
-            for(var i = 0; i < allFeeds.length; i++) {
-                expect(allFeeds[i].name).toBeDefined();
-                expect(allFeeds[i].name.length).not.toBe(0);
-            }
+            allFeeds.forEach(function(feed) {
+                expect(feed.name).toBeDefined();
+                expect(feed.name).toBeTruthy();
+            })
         })
     });
 
 
     /* TODO: Write a new test suite named "The menu" */
+    
     describe('the menu', function() {
         // Pre-define elements needed for testing hiding/showing of the menu
-        var body = document.body;
+        var body = $('body');
         var menuIcon = document.querySelector(".menu-icon-link");
-
+    
         /* TODO: Write a test that ensures the menu element is
          * hidden by default. You'll have to analyze the HTML and
          * the CSS to determine how we're performing the
          * hiding/showing of the menu element.
          */
         it('the menu element is hidden by default', function() {
-            expect(body.className).toContain('menu-hidden');
-        })
-
+            expect(body.hasClass('menu-hidden')).toBe(true);
+        });
+    
         /* TODO: Write a test that ensures the menu changes
           * visibility when the menu icon is clicked. This test
           * should have two expectations: does the menu display when
@@ -74,16 +75,16 @@ $(function() {
           */
          it('the menu changes visibility', function() {
              menuIcon.click();
-             expect(body.className).not.toContain('menu-hidden');
-
+             expect(body.hasClass('menu-hidden')).toBe(false);
+    
              menuIcon.click();
-             expect(body.className).toContain('menu-hidden');
+             expect(body.hasClass('menu-hidden')).toBe(true);
          })
+    });
 
-    })
 
     /* TODO: Write a new test suite named "Initial Entries" */
-    describe('Initial Entries', function() {
+    describe('InitialEntries', function() {
 
         /* TODO: Write a test that ensures when the loadFeed
          * function is called and completes its work, there is at least
@@ -92,13 +93,11 @@ $(function() {
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
         beforeEach(function(done) {
-            loadFeed(0, function() {
-                done();
-            })
+            loadFeed(0, done)
         })
 
         it('has at least a single .entry element', function() {
-            expect($('.entry .feed')).toBeDefined();
+            expect($('.entry .feed').length).toBeGreaterThan(0);
         })
     })
 
@@ -112,16 +111,16 @@ $(function() {
         beforeEach(function(done) {
             $('.feed').empty();
             loadFeed(0, function() {
-                firstFeed = $('.feed').find(allFeeds.url);
-                done();
+                firstFeed = $('.feed').html();
+                loadFeed(1, function() {
+                    secondFeed = $('.feed').html();
+                    done();
+                })
             })
-            loadFeed(1, function() {
-                secondFeed = $('.feed').find(allFeeds.url);
-                done();
-            })
-        })
+        });
+    
         it('the two feeds are different', function() {
-            expect(firstFeed).not.toBe(secondFeed);
+            expect(firstFeed).not.toEqual(secondFeed);
         })
     })
 }());

@@ -97,7 +97,7 @@ $(function() {
         })
 
         it('has at least a single .entry element', function() {
-            expect($('.entry .feed').length).toBeGreaterThan(0);
+            expect($('.feed .entry').length).toBeGreaterThan(0);
         })
     })
 
